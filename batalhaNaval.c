@@ -34,18 +34,17 @@ int main()
     int linhaNavioI = 1, colunaNavioI = 2; // Posição inicial do navio horizontal
     int linhaNavioJ = 3, colunaNavioJ = 3; // Posição inicial do navio vertical
 
-    // 5. Utilizando loop aninhado para posição horizontal e vercical dos navios
+    // 5. navio horizontal e vertical no tabuleiro
 
-    for (int j = 0; j < navioHorizontal[0]; j++)
+    for (int j = 0; j < 3; j++)
     {
         tabuleiro[linhaNavioI][colunaNavioI + j] = 3; // Marcando a posição do navio com 3
-
-        for (int i = 0; i < navioVertical[0]; i++)
-        {
-            tabuleiro[linhaNavioJ + i][colunaNavioJ] = 3; // Marcando a posição do navio com 3
-        }
     }
 
+    for (int i = 0; i < 3; i++)
+    {
+        tabuleiro[linhaNavioJ + i][colunaNavioJ] = 3; // Marcando a posição do navio com 3
+    }
     // 6. Exibindo as coordenadas do tabuleiro
 
     printf("Tabuleiro batalha naval\n");
@@ -57,7 +56,7 @@ int main()
     {
         printf(" %c", linha[j]);
     }
-    
+
     // Exibir números
 
     for (int i = 0; i < 10; i++)
