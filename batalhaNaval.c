@@ -1,68 +1,84 @@
 #include <stdio.h>
 
+#define TABULEIRO 10
+#define AGUA 0
+#define TAMNAVIO 3
+#define NAVIO 3
+#define LINHA 10
+
 int main()
 {
-    // Letras representando a linha do tabuleiro
+    // Letras representando a linha do tabuleiro e números representando a coluna
 
-    char linha[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+    char linha[TABULEIRO] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
 
-    // Números representando a coluna do tabuleiro
-
-    int coluna[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int coluna[TABULEIRO] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
     // 1. Criando o tabuleiro 10x10 (Matriz 10x10)
 
-    int tabuleiro[10][10];
+    int tabuleiro[TABULEIRO][TABULEIRO];
 
     // 2. Iniciando o tabuleiro com 0 representando a água
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < TABULEIRO; i++)
     {
-        for (int j = 0; j < 10; j++)
+        for (int j = 0; j < TABULEIRO; j++)
         {
 
-            tabuleiro[i][j] = 0; // Inicializando todas as posições com 0
+            tabuleiro[i][j] = AGUA;
         }
     }
-    // 3. Definir posições dos navios
+    // 3. Definir posições dos navios na posição horizontal, vertical e diagonal
 
-    int navioHorizontal[3] = {3, 3, 3}; // Navio de tamanho 3 ocupando 3 posições horizontais
-    int navioVertical[3] = {3, 3, 3};   // Navio de tamanho 3 ocupando 3 posições verticais
-
-    // 4. Posições iniciais dos navios no tabuleiro
-
-    int linhaNavioI = 1, colunaNavioI = 2; // Posição inicial do navio horizontal
-    int linhaNavioJ = 3, colunaNavioJ = 3; // Posição inicial do navio vertical
-
-    // 5. navio horizontal e vertical no tabuleiro
-
-    for (int j = 0; j < 3; j++)
+    // Navio horizontal
+    int linhaH = 1, colunaH = 2;
+    int linhaI = 2, colunaI = 8;
+    for (int j = 0; j < TAMNAVIO; j++)
     {
-        tabuleiro[linhaNavioI][colunaNavioI + j] = 3; // Marcando a posição do navio com 3
+        tabuleiro[linhaH][colunaH + j] = NAVIO;
+    }
+    for (int j = 0; j < TAMNAVIO; j++)
+    {
+        tabuleiro[linhaI + j][colunaI] = NAVIO;
     }
 
-    for (int i = 0; i < 3; i++)
+    // Navio diagonal para baixo à direita e para baixo à esquerda
+    int linhaD = 3, colunaD = 3;
+    int linhaF = 7, colunaF = 5;
+
+    for (int i = 0; i < TAMNAVIO; i++)
     {
-        tabuleiro[linhaNavioJ + i][colunaNavioJ] = 3; // Marcando a posição do navio com 3
+        if (tabuleiro[linhaD + i][colunaD + i] == AGUA)
+        {
+            tabuleiro[linhaD + i][colunaD + i] = NAVIO;
+        }
     }
-    // 6. Exibindo as coordenadas do tabuleiro
+
+    for (int j = 0; j < TAMNAVIO; j++)
+    {
+
+        if ((linhaF + j) < TABULEIRO && (colunaF - j) >= 0)
+        {
+            tabuleiro[linhaF + j][colunaF - j] = NAVIO;
+        }
+    }
 
     printf("Tabuleiro batalha naval\n");
 
     // Exibir letras
 
     printf("   ");
-    for (int j = 0; j < 10; j++)
+    for (int j = 0; j < TABULEIRO; j++)
     {
         printf(" %c", linha[j]);
     }
 
     // Exibir números
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < TABULEIRO; i++)
     {
         printf("\n %2d", coluna[i]);
-        for (int j = 0; j < 10; j++)
+        for (int j = 0; j < TABULEIRO; j++)
         {
             printf(" %d", tabuleiro[i][j]);
         }
